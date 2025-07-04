@@ -5,6 +5,7 @@ import invariant from "tiny-invariant";
 
 import type { ContactRecord } from "../data";
 import { getContact, updateContact } from "../data";
+import { Button } from "~/components/ui/Button";
 
 export const loader = async ({
 	params,
@@ -29,7 +30,6 @@ export default function Contact() {
 					src={contact.avatar}
 				/>
 			</div>
-
 			<div>
 				<h1>
 					{contact.first || contact.last ? (
@@ -56,7 +56,7 @@ export default function Contact() {
 
 				<div>
 					<Form action="edit">
-						<button type="submit">Edit</button>
+						<Button type="submit">Edit</Button>
 					</Form>
 
 					<Form
@@ -71,7 +71,7 @@ export default function Contact() {
 							}
 						}}
 					>
-						<button type="submit">Delete</button>
+						<Button type="submit">Delete</Button>
 					</Form>
 				</div>
 			</div>
@@ -98,7 +98,7 @@ const Favorite: FunctionComponent<{
 	
 	return (
 		<fetcher.Form method="post">
-			<button
+			<Button
 				aria-label={
 					favorite
 						? "Remove from favorites"
@@ -108,7 +108,7 @@ const Favorite: FunctionComponent<{
 				value={favorite ? "false" : "true"}
 			>
 				{favorite ? "★" : "☆"}
-			</button>
+			</Button>
 		</fetcher.Form>
 	);
 };

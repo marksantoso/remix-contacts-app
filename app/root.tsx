@@ -1,22 +1,22 @@
-import { useEffect } from "react";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import {
-  Form,
   Links,
   Meta,
+  Outlet,
   Scripts,
   ScrollRestoration,
-  Outlet,
-  NavLink,
-  useLoaderData,
-  redirect,
   useNavigation,
-  useSubmit
 } from "@remix-run/react";
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-
-import { createEmptyContact, getContacts } from "./data";
 
 import appStylesHref from "./app.css?url";
+import { createEmptyContact, getContacts } from "./data";
+import SideBar from "./components/layout/SideBar";
+
+export type LoaderData = {
+  contacts: Awaited<ReturnType<typeof getContacts>>;
+  q: string | null;
+};
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStylesHref },
@@ -37,17 +37,7 @@ export const action = async () => {
 };
 
 export default function App() {
-  const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
-  const submit = useSubmit();
-
-  useEffect(() => {
-    const searchField = document.getElementById("q");
-    if (searchField instanceof HTMLInputElement) {
-      searchField.value = q || "";
-    }
-  }, [q]);
-
   const searching = navigation.location && new URLSearchParams(navigation.location.search).has("q");
 
   return (
@@ -59,73 +49,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div id="sidebar">
-          <h1>Remix Contacts</h1>
-          <div>
-            <Form 
-              id="search-form"
-              onChange={(event) => {
-                const isFirstSearch = q === null;
-                submit(event.currentTarget, {
-                  replace: !isFirstSearch,
-                });
-              }}
-              role="search">
-              <input
-                id="q"
-                defaultValue={q ?? ""}
-                aria-label="Search contacts"
-                className={searching ? "loading" : ""}
-                placeholder="Search"
-                type="search"
-                name="q"
-              />
-              <div
-                aria-hidden
-                hidden={!searching}
-                id="search-spinner"
-              />
-            </Form>
-            <Form method="post">
-              <button type="submit">New</button>
-            </Form>
-          </div>
-          <nav>
-            {contacts.length ? (
-              <ul>
-                {contacts.map((contact) => (
-                  <li key={contact.id}>
-                    <NavLink
-                      className={({ isActive, isPending }) =>
-                        isActive
-                          ? "active"
-                          : isPending
-                            ? "pending"
-                            : ""
-                      }
-                      to={`contacts/${contact.id}`}
-                    >
-                      {contact.first || contact.last ? (
-                        <>
-                          {contact.first} {contact.last}
-                        </>
-                      ) : (
-                        <i>No Name</i>
-                      )}{" "}
-                      {contact.favorite ? (
-                        <span>★</span>
-                      ) : null}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>
-                <i>No contacts</i>
-              </p>
-            )}
-          </nav>
-        </div>
+        <SideBar />
         <div
           className={
             navigation.state === "loading" && !searching
