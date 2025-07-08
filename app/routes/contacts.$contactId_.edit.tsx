@@ -29,7 +29,6 @@ export const action = async ({
     return redirect(`/contacts/${params.contactId}`);
 };
 
-
 export default function EditContact() {
     const { contact } = useLoaderData<typeof loader>();
 

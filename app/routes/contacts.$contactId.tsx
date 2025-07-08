@@ -56,7 +56,7 @@ export default function Contact() {
 
 				<div>
 					<Form action="edit">
-						<Button type="submit">Edit</Button>
+						<Button type="submit" variant="secondary" size="sm">Edit</Button>
 					</Form>
 
 					<Form
@@ -71,7 +71,7 @@ export default function Contact() {
 							}
 						}}
 					>
-						<Button type="submit">Delete</Button>
+						<Button type="submit" variant="danger" size="sm">Delete</Button>
 					</Form>
 				</div>
 			</div>
@@ -104,6 +104,7 @@ const Favorite: FunctionComponent<{
 						? "Remove from favorites"
 						: "Add to favorites"
 				}
+				variant="unstyled"
 				name="favorite"
 				value={favorite ? "false" : "true"}
 			>

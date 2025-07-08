@@ -15,14 +15,15 @@
     "jsx": "react-jsx",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
-    "target": "ES2022",
+    "target": "ESNext",
+    "module": "ESNext",
+    "skipLibCheck": true,
     "strict": true,
     "allowJs": true,
-    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*"],
     },
 
     // Remix takes care of building everything in `remix build`.

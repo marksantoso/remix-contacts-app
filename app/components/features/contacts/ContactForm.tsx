@@ -31,8 +31,6 @@ export function ContactForm({ contact }: ContactFormProps) {
                 placeholder="Last"
                 type="text"
             />
-
-
             <Input
                 label="Twitter"
                 defaultValue={contact?.twitter}
@@ -57,8 +55,8 @@ export function ContactForm({ contact }: ContactFormProps) {
                 rows={6}
             />
             <p>
-                <Button type="submit">Save</Button>
-                <Button type="button" onClick={() => navigate(-1)}>
+                <Button type="submit" variant="primary" size="sm">Save</Button>
+                <Button type="button" variant="secondary" size="sm" onClick={() => navigate(-1)}>
                     Cancel
                 </Button>
             </p>

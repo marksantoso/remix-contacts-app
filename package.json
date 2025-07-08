@@ -11,6 +11,11 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@chakra-ui/react": "^3.21.1",
+    "@chakra-ui/theme": "^3.4.6",
+    "@chakra-ui/theme-utils": "^2.0.21",
+    "@emotion/react": "^11.14.0",
+    "@emotion/server": "^11.11.0",
     "@remix-run/node": "^2.16.8",
     "@remix-run/react": "^2.16.8",
     "@remix-run/serve": "^2.16.8",
